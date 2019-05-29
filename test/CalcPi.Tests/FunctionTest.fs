@@ -23,5 +23,6 @@ type MyTests(output:ITestOutputHelper) =
         let context = TestLambdaContext()
         let pi = lambdaFunction.FunctionHandler 10 context
         output.WriteLine("pi = {0}", pi)
-        printfn "pi = %f" pi
         pi |> should (equalWithin 0.0005) 3.14159265
+
+// dotnet test --logger:"console;verbosity=detailed"
