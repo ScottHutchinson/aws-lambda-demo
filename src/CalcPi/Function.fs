@@ -9,7 +9,7 @@ module calcPi =
 
     /// Generates random X, Y values between 0 and 1
     let randomPoints max = seq {
-        let rnd = new Random()
+        let rnd = Random()
         for _ in 0 .. max do
             yield 0.5 - rnd.NextDouble(), 0.5 - rnd.NextDouble() }
 
@@ -33,7 +33,6 @@ module calcPi =
         |> Array.Parallel.map monteCarloPI
         |> Array.average
 
-
 open Amazon.Lambda.Core
 open calcPi
 
@@ -41,10 +40,9 @@ open calcPi
 [<assembly: LambdaSerializer(typeof<Amazon.Lambda.Serialization.Json.JsonSerializer>)>]
 ()
 
-
 type Function() =
     /// <summary>
-    /// A simple function that takes a string and does a ToUpper
+    /// A function that calculates pi.
     /// </summary>
     /// <param name="iterations"></param>
     /// <param name="context"></param>
