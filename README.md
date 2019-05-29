@@ -11,12 +11,12 @@ AWS Lambda function that calculates the value of pi
 5. [Install the AWS Toolkit for Visual Studio Code](https://docs.aws.amazon.com/toolkit-for-vscode/latest/userguide/getting-started.html)  
 6. In the VS Code Command Palette:  
   a. Type `AWS: Create Credentials Profile`  
+  When prompted, enter the access key (labeled `Access key ID` in the `IAM Management Console`) and then the secret key. This will store the access keys in the file `"%UserProfile%\.aws\credentials"`  
   b. Type `AWS: Connect to AWS`  
-  When prompted, enter the access key (labeled `Access key ID` in the `IAM Management Console`) and then the secret key.  
 7. Install the dotnet AWS Lambda project templates using this command line:  
 ```dotnet new -i Amazon.Lambda.Templates::*```  
-8. Create a new project using this command line:  
-```dotnet new lambda.EmptyFunction --language F# --name CalcPi --profile default --region us-west-2```
+8. Create a new project using this command line (where `FpDevUser` is whatever name you gave to the profile in step 6a):  
+```dotnet new lambda.EmptyFunction --language F# --name CalcPi --profile FpDevUser --region us-west-2```
 9. Add this element to the .fsproj file for the project containing the lambda function:
 ```  
   <ItemGroup>
