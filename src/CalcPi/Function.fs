@@ -35,10 +35,14 @@ module calcPi =
 
 open Amazon.Lambda.Core
 open calcPi
+open Newtonsoft.Json
+open Newtonsoft.Json.Linq
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [<assembly: LambdaSerializer(typeof<Amazon.Lambda.Serialization.Json.JsonSerializer>)>]
 ()
+
+type Input = { points: int; iterations: int }
 
 type Function() =
     /// <summary>
@@ -47,5 +51,7 @@ type Function() =
     /// <param name="iterations"></param>
     /// <param name="context"></param>
     /// <returns></returns>
-    member __.FunctionHandler (iterations: int) (_: ILambdaContext) =
-        averagePi 1000000 iterations
+    member __.FunctionHandler (input: Input) (_: ILambdaContext) =
+        let pi = averagePi input.points input.iterations
+        let ret = {| statusCode = 200; body = pi |}
+        JObject.FromObject(ret)
